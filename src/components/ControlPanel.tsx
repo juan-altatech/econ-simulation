@@ -92,7 +92,7 @@ function InfoModal({ open, onClose }: { open: boolean; onClose: () => void }) {
             <h3 className="text-xs font-semibold uppercase tracking-wider text-blue-400 mb-2">Overview</h3>
             <p>
               This simulator models the economic impact of increasingly capable AI systems on the US labor market from February 2026 onward.
-              It tracks how <span className="text-white font-medium">~160 million workers</span> across 50 job categories are affected as AI models
+              It tracks how <span className="text-white font-medium">~160 million workers</span> across 60 job categories are affected as AI models
               grow in capability, decline in cost, and expand into physical tasks via robotics.
             </p>
           </section>
