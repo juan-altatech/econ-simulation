@@ -29,7 +29,7 @@ export default function Dashboard() {
   const prevSnapshot = state.currentMonth > 0 ? state.history[state.currentMonth - 1] : undefined;
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-full overflow-hidden">
       {/* Left Sidebar */}
       <ControlPanel
         params={state.params}
