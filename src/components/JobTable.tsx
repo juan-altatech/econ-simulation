@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { JobCategory, MonthSnapshot, JobState } from '../engine/types';
+import ChartHeader from './ChartHeader';
 
 interface JobTableProps {
   jobs: JobCategory[];
@@ -76,7 +77,10 @@ export default function JobTable({ jobs, snapshot }: JobTableProps) {
 
   return (
     <div className="bg-slate-800/40 rounded-xl p-4 border border-slate-700/30">
-      <h3 className="text-sm font-semibold text-slate-300 mb-3">Job Categories</h3>
+      <ChartHeader
+        title="Job Categories"
+        tooltip="Detailed breakdown of all 50 modeled job categories. Click column headers to sort. The % Displaced column shows the S-curve displacement progress for each job. Status colors: green = safe (AI can't yet do this job affordably), yellow = at risk (displacement conditions are met, early adoption phase), red = actively displacing, gray = mostly displaced. Cognitive score determines when AI becomes capable; physical score and human interaction act as drag factors that slow displacement even when AI is technically capable."
+      />
       <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
         <table className="w-full text-xs">
           <thead className="sticky top-0 bg-slate-800 z-10">

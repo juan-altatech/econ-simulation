@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { MonthSnapshot, JobCategory, IndustrySector } from '../../engine/types';
+import ChartHeader from '../ChartHeader';
 
 interface SectorDisplacementProps {
   snapshot: MonthSnapshot;
@@ -51,7 +52,10 @@ export default function SectorDisplacement({ snapshot, jobs }: SectorDisplacemen
 
   return (
     <div className="bg-slate-800/40 rounded-xl p-4 border border-slate-700/30">
-      <h3 className="text-sm font-semibold text-slate-300 mb-3">Job Displacement by Sector (%)</h3>
+      <ChartHeader
+        title="Job Displacement by Sector (%)"
+        tooltip="Shows what percentage of each industry sector's workforce has been displaced by AI at the current point in time. Sectors are sorted by displacement rate. Sectors with high physical requirements (construction, agriculture) and high human-interaction needs (education, healthcare) tend to resist displacement longer. Color-coded bars let you quickly compare across the economy."
+      />
       <ResponsiveContainer width="100%" height={Math.max(250, data.length * 28)}>
         <BarChart data={data} layout="vertical" margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#334155" horizontal={false} />

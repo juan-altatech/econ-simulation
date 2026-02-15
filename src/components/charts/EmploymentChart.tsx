@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import ChartHeader from '../ChartHeader';
 import { MonthSnapshot, AIModel } from '../../engine/types';
 
 interface EmploymentChartProps {
@@ -32,7 +33,10 @@ export default function EmploymentChart({ history, currentMonth, models }: Emplo
 
   return (
     <div className="bg-slate-800/40 rounded-xl p-4 border border-slate-700/30">
-      <h3 className="text-sm font-semibold text-slate-300 mb-3">Employment Over Time (Millions)</h3>
+      <ChartHeader
+        title="Employment Over Time (Millions)"
+        tooltip="Stacked area chart tracking the full US labor force. Blue = traditional human workers, cyan = workers augmented by AI tools (more productive but still employed), purple = newly created AI-era roles. The red overlay shows displaced workers. Dashed vertical lines mark each AI model release. Early years show little change — watch for the compounding acceleration."
+      />
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#334155" />

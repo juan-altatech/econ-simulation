@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { MonthSnapshot } from '../../engine/types';
+import ChartHeader from '../ChartHeader';
 
 interface CompoundingEffectsProps {
   history: MonthSnapshot[];
@@ -29,13 +30,15 @@ export default function CompoundingEffects({ history, currentMonth }: Compoundin
 
   return (
     <div className="bg-slate-800/40 rounded-xl p-4 border border-slate-700/30">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between text-sm font-semibold text-slate-300 mb-2"
-      >
-        Compounding Effects
-        <span className="text-xs text-slate-500">{isOpen ? '▼' : '▶'}</span>
-      </button>
+      <div className="flex items-center justify-between mb-2">
+        <ChartHeader
+          title="Compounding Effects"
+          tooltip="Tracks the downstream ripple effects of AI displacement. Tax revenue changes as the wage base shifts. Consumer spending reflects employment levels. Productivity multiplier shows economy-wide efficiency gains from AI augmentation. Government spending rises automatically as unemployment triggers safety-net programs. These effects compound over time — small monthly shifts accumulate into major structural changes."
+        />
+        <button onClick={() => setIsOpen(!isOpen)} className="text-xs text-slate-500 hover:text-slate-300 transition-colors">
+          {isOpen ? '▼' : '▶'}
+        </button>
+      </div>
 
       {isOpen && (
         <>

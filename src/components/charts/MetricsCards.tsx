@@ -1,4 +1,5 @@
 import { MonthSnapshot } from '../../engine/types';
+import ChartHeader from '../ChartHeader';
 
 interface MetricsCardsProps {
   snapshot: MonthSnapshot;
@@ -41,7 +42,12 @@ export default function MetricsCards({ snapshot, prevSnapshot }: MetricsCardsPro
   const employedDelta = currentEmployed - prevEmployed;
 
   return (
-    <div className="grid grid-cols-4 lg:grid-cols-8 gap-2 mb-4">
+    <div className="mb-4">
+      <ChartHeader
+        title="Key Metrics"
+        tooltip="Snapshot of the most important indicators at the current simulation month. Employment includes both traditional and new AI-era jobs. Unemployment accounts for displaced workers minus those who found new roles. GDP shows total economic output. AI Cost/hr is the equivalent hourly rate to run AI for one hour of human-equivalent work — when this drops below a job's hourly wage times the displacement threshold, that job becomes eligible for AI displacement."
+      />
+      <div className="grid grid-cols-4 lg:grid-cols-8 gap-2">
       <MetricCard
         label="Employment"
         value={`${currentEmployed.toFixed(1)}M`}
@@ -89,6 +95,7 @@ export default function MetricsCards({ snapshot, prevSnapshot }: MetricsCardsPro
         color="text-orange-400"
         sub="Gov. spending"
       />
+      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Line, ComposedChart } from 'recharts';
+import ChartHeader from '../ChartHeader';
 import { MonthSnapshot } from '../../engine/types';
 
 interface GDPChartProps {
@@ -24,7 +25,10 @@ export default function GDPChart({ history, currentMonth }: GDPChartProps) {
 
   return (
     <div className="bg-slate-800/40 rounded-xl p-4 border border-slate-700/30">
-      <h3 className="text-sm font-semibold text-slate-300 mb-3">GDP Composition ($ Trillions)</h3>
+      <ChartHeader
+        title="GDP Composition ($ Trillions)"
+        tooltip="Breaks GDP into three sources: human labor (traditional work), AI-augmented labor (humans using AI tools with a productivity multiplier), and AI-only output (work done entirely by AI systems). The amber line shows total GDP. Even as human labor GDP shrinks, augmented and AI-only output can keep total GDP growing — but the distribution of that wealth is a separate question."
+      />
       <ResponsiveContainer width="100%" height={280}>
         <ComposedChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#334155" />

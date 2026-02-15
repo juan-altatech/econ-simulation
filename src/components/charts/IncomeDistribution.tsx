@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { MonthSnapshot } from '../../engine/types';
+import ChartHeader from '../ChartHeader';
 
 interface IncomeDistributionProps {
   history: MonthSnapshot[];
@@ -26,7 +27,10 @@ export default function IncomeDistribution({ history, currentMonth }: IncomeDist
 
   return (
     <div className="bg-slate-800/40 rounded-xl p-4 border border-slate-700/30">
-      <h3 className="text-sm font-semibold text-slate-300 mb-3">Income Distribution ($K) & Gini</h3>
+      <ChartHeader
+        title="Income Distribution ($K) & Gini"
+        tooltip="Tracks income across the population over time. The five lines show the 10th, 25th, 50th (median), 75th, and 90th income percentiles in thousands of dollars. The dashed orange line is the Gini coefficient (right axis, 0 = perfect equality, 1 = perfect inequality). As AI displaces lower-wage jobs first, inequality tends to rise — but new jobs and augmentation effects can moderate this depending on your parameter settings."
+      />
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#334155" />

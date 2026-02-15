@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { MonthSnapshot, AIModel } from '../../engine/types';
+import ChartHeader from '../ChartHeader';
 
 interface AICapabilityTimelineProps {
   history: MonthSnapshot[];
@@ -31,7 +32,10 @@ export default function AICapabilityTimeline({ history, currentMonth, models }: 
 
   return (
     <div className="bg-slate-800/40 rounded-xl p-4 border border-slate-700/30">
-      <h3 className="text-sm font-semibold text-slate-300 mb-3">AI Model Capability & Cost</h3>
+      <ChartHeader
+        title="AI Model Capability & Cost"
+        tooltip="Shows AI progress over time as a step chart — capabilities jump with each discrete model release, not continuously. Blue = cognitive capability (what complexity of thinking the AI can handle), green = physical/robotics capability, purple dashed = reliability. The amber line (right axis) shows the equivalent hourly cost of AI labor, which declines as token prices fall. When capability exceeds a job's complexity and cost drops below the threshold, displacement begins."
+      />
       <ResponsiveContainer width="100%" height={280}>
         <ComposedChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
