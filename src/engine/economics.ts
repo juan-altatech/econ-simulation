@@ -20,6 +20,7 @@ export function calculateEconomics(
   const totalOriginalWorkers = jobs.reduce((s, j) => s + j.workers, 0);
 
   // Calculate wage income from remaining human workers
+  // Note: worker counts are in millions, so multiply by 1e6 for actual headcount
   let humanWageIncome = 0;
   let augmentedWageIncome = 0;
   for (let i = 0; i < jobs.length; i++) {
@@ -27,17 +28,17 @@ export function calculateEconomics(
     const state = jobStates[i];
     if (!state) continue;
     const pureHumanWorkers = state.currentWorkers - state.aiAugmentedWorkers;
-    humanWageIncome += pureHumanWorkers * job.medianSalary;
+    humanWageIncome += pureHumanWorkers * 1e6 * job.medianSalary;
 
     // Augmented workers are more productive, some of that shows up as higher wages
     const productivityBoost = 1.5; // augmented workers are 1.5x as productive
-    augmentedWageIncome += state.aiAugmentedWorkers * job.medianSalary * productivityBoost;
+    augmentedWageIncome += state.aiAugmentedWorkers * 1e6 * job.medianSalary * productivityBoost;
   }
 
   // New job income
   let newJobIncome = 0;
   for (const nj of newJobs) {
-    newJobIncome += nj.workers * nj.averageSalary;
+    newJobIncome += nj.workers * 1e6 * nj.averageSalary;
   }
 
   // GDP calculations
@@ -67,7 +68,7 @@ export function calculateEconomics(
   const unemploymentBenefitPerWorker = 25000; // annual
   // Workers in retraining period
   const workersOnBenefits = Math.min(totalDisplaced, totalDisplaced * Math.min(1, retrainingPeriodMonths / 12));
-  const governmentSpending = (workersOnBenefits * unemploymentBenefitPerWorker) / 1e12 + 0.5; // 0.5T baseline
+  const governmentSpending = (workersOnBenefits * 1e6 * unemploymentBenefitPerWorker) / 1e12 + 0.5; // 0.5T baseline
 
   // Income distribution
   // As displacement increases, inequality grows (initially)
